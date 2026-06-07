@@ -166,3 +166,38 @@ body {
   color: var(--marrom);
   opacity: 0.7;
 }
+
+/* ===== FILTROS E PAGINAÇÃO ===== */
+.custom-select {
+  border: 1px solid var(--bege);
+  border-radius: 30px;
+  padding: 0.5rem 1.5rem;
+  font-family: var(--fonte-corpo);
+  color: var(--cinza-escuro);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.custom-select:focus {
+  outline: none;
+  border-color: var(--dourado);
+  box-shadow: 0 0 0 0.2rem rgba(201, 169, 110, 0.2);
+}
+
+.pagination .page-link {
+  color: var(--marrom);
+  border-color: var(--bege);
+  font-family: var(--fonte-titulo);
+  cursor: pointer;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--dourado);
+  border-color: var(--dourado);
+  color: white;
+}
+
+.pagination .page-link:hover {
+  background-color: var(--bege);
+  color: var(--marrom);
+}

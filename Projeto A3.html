@@ -33,18 +33,37 @@
     </nav>
   </header>
 
-  <main class="container my-5">
-    <div class="row justify-content-center mb-5">
+<main class="container my-5">
+    <div class="row justify-content-center mb-3">
       <div class="col-md-6 col-lg-4">
         <input type="text" id="campoBusca" class="form-control search-input" placeholder="Buscar produto...">
       </div>
     </div>
 
+    <div class="row justify-content-center mb-5 gap-2">
+      <div class="col-md-4 col-lg-3">
+        <select id="filtroCategoria" class="form-select custom-select">
+          <option value="">Todas as Categorias</option>
+        </select>
+      </div>
+      <div class="col-md-4 col-lg-3">
+        <select id="ordenacaoPreco" class="form-select custom-select">
+          <option value="">Ordenar por Preço (Padrão)</option>
+          <option value="asc">Menor Preço</option>
+          <option value="desc">Maior Preço</option>
+        </select>
+      </div>
+    </div>
+
     <div id="containerProdutos" class="row g-4"></div>
+
+    <nav aria-label="Navegação de páginas" class="mt-5 text-center">
+      <ul class="pagination justify-content-center" id="paginacaoContainer"></ul>
+    </nav>
 
     <div id="mensagemVazia" class="text-center mt-5 mensagem-vazia" style="display: none;">
       <h4>Nenhum produto encontrado</h4>
-      <p>Tente outro termo ou favorite alguns itens.</p>
+      <p>Tente outro termo ou limpe os filtros.</p>
     </div>
   </main>
 
