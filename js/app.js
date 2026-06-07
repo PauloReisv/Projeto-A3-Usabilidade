@@ -1,4 +1,4 @@
-// ========== VARIÁVEIS GLOBAIS ==========
+// ========== VARIÁVEIS ==========
 let todosProdutos = [];
 let favoritos = [];
 let exibindoFavoritos = false;
