@@ -50,28 +50,22 @@ async function carregarProdutos() {
 // ========== RENDERIZAÇÃO ==========
 function criarCard(produto) {
   const favorito = isFavorito(produto.id);
-  const classeCoracao = favorito ? 'bi-heart-fill fav-icon' : 'bi-heart fav-icon';
+  const classeCoracao = favorito ? 'bi-heart-fill' : 'bi-heart';
+
   return `
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 border p-4">
-      <div class="card h-100">
-        <!-- Imagem de capa (thumbnail) -->
-        <img src="${produto.thumbnail}" class="card-img-top" alt="${produto.title}"
-             style="max-height: 100px; object-fit: cover;">
-        <!-- Imagem redonda sobreposta -->
-        <div class="d-flex justify-content-center" style="margin-top: -40px;">
-          <img src="${produto.images[0] || produto.thumbnail}" alt="${produto.title}"
-               style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;
-                      border: 3px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+      <div class="product-card">
+        <img src="${produto.thumbnail}" class="card-img-top-cover w-100" alt="${produto.title}">
+        <div class="img-avatar-wrapper">
+          <img src="${produto.images[0] || produto.thumbnail}" class="img-avatar" alt="${produto.title}">
         </div>
-        <div class="card-body">
-          <div class="fw-bold">${produto.title}</div>
-          <div class="fw-light" style="font-size: 10pt">$${produto.price.toFixed(2)}</div>
-          <p class="text-secondary fs-6">
-            ${produto.description.slice(0, 80)}...
-          </p>
-          <div class="d-flex justify-content-around align-items-center">
-            <i class="bi ${classeCoracao}" data-id="${produto.id}" aria-label="Favoritar"></i>
-            <button class="btn btn-outline-secondary btn-sm favorite-btn" data-id="${produto.id}">
+        <div class="card-body-custom">
+          <div class="product-title">${produto.title}</div>
+          <div class="product-price">R$ ${produto.price.toFixed(2)}</div>
+          <p class="product-description">${produto.description.slice(0, 70)}...</p>
+          <div class="product-actions">
+            <i class="bi ${classeCoracao} heart-icon" data-id="${produto.id}" aria-label="Favoritar"></i>
+            <button class="btn-favoritar favorite-btn" data-id="${produto.id}">
               <i class="bi bi-star me-1"></i> Favoritar
             </button>
           </div>
@@ -89,8 +83,7 @@ function renderProdutos(produtos) {
   mensagemVazia.style.display = 'none';
   containerProdutos.innerHTML = produtos.map(criarCard).join('');
 
-  // Eventos de favoritar (ícone coração e botão)
-  document.querySelectorAll('.fav-icon, .favorite-btn').forEach(elemento => {
+  document.querySelectorAll('.heart-icon, .favorite-btn').forEach(elemento => {
     elemento.addEventListener('click', (e) => {
       const id = Number(elemento.dataset.id);
       alternarFavorito(id);

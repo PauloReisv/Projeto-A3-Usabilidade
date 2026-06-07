@@ -1,0 +1,168 @@
+﻿/* ===== ESTILO NATURAL RETRO ===== */
+:root {
+  --creme: #F9F6F0;
+  --bege: #EAE0D5;
+  --marrom: #5E4B3C;
+  --dourado: #C9A96E;
+  --rosado: #D4A9A5;
+  --cinza-escuro: #3A3A3A;
+  --fonte-titulo: 'Playfair Display', serif;
+  --fonte-corpo: 'Lato', sans-serif;
+}
+
+body {
+  background-color: var(--creme);
+  font-family: var(--fonte-corpo);
+  color: var(--cinza-escuro);
+  letter-spacing: 0.02em;
+}
+
+.navbar {
+  background-color: var(--marrom) !important;
+  border-bottom: 2px solid var(--dourado);
+}
+
+.navbar-brand, .nav-link {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  color: var(--dourado) !important;
+  letter-spacing: 1px;
+}
+
+.nav-link.active {
+  color: white !important;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.search-input {
+  background-color: white;
+  border: 1px solid var(--bege);
+  border-radius: 30px;
+  padding: 0.5rem 1.5rem;
+  font-family: var(--fonte-corpo);
+  transition: 0.3s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--dourado);
+  box-shadow: 0 0 0 0.2rem rgba(201, 169, 110, 0.2);
+}
+
+/* Grid dos produtos */
+#containerProdutos {
+  margin-top: 2rem;
+}
+
+/* Card personalizado */
+.product-card {
+  background: white;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.1);
+}
+
+.card-img-top-cover {
+  height: 120px;
+  object-fit: cover;
+  background-color: var(--bege);
+}
+
+.img-avatar-wrapper {
+  margin-top: -40px;
+  text-align: center;
+}
+
+.img-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card-body-custom {
+  padding: 1.5rem 1.5rem 1rem;
+  text-align: center;
+}
+
+.product-title {
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--marrom);
+  margin-bottom: 0.3rem;
+}
+
+.product-price {
+  font-family: var(--fonte-corpo);
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: var(--dourado);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.8rem;
+}
+
+.product-description {
+  font-size: 0.8rem;
+  color: #6c757d;
+  line-height: 1.4;
+  margin-bottom: 1.2rem;
+  min-height: 3em;
+}
+
+.product-actions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid var(--bege);
+  padding-top: 0.8rem;
+}
+
+.heart-icon {
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: var(--rosado);
+  transition: transform 0.2s;
+}
+
+.heart-icon:hover {
+  transform: scale(1.2);
+}
+
+.heart-icon.bi-heart-fill {
+  color: #C25A5A;
+}
+
+.btn-favoritar {
+  background: transparent;
+  border: 1px solid var(--dourado);
+  color: var(--dourado);
+  border-radius: 20px;
+  padding: 0.3rem 1rem;
+  font-size: 0.8rem;
+  font-family: var(--fonte-titulo);
+  letter-spacing: 0.05em;
+  transition: all 0.3s;
+}
+
+.btn-favoritar:hover {
+  background: var(--dourado);
+  color: white;
+}
+
+/* Mensagem vazia */
+.mensagem-vazia {
+  font-family: var(--fonte-titulo);
+  color: var(--marrom);
+  opacity: 0.7;
+}
