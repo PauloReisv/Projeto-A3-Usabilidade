@@ -15,19 +15,30 @@
 </head>
 <body>
   <header>
-    <nav class="navbar navbar-expand-lg">
-      <div class="container">
-        <a class="navbar-brand" href="#">Essenza</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
-                style="border-color: var(--dourado);">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link active" href="#" id="navTodos">Todos</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" id="navFavoritos" title="Favoritos"><i class="bi bi-star"></i></a></li>
-            <li class="nav-item"><a class="nav-link" href="#" id="navCarrinho" title="Carrinho de Compras"><i class="bi bi-cart"></i></a></li>
+    <nav class="navbar">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a class="navbar-brand d-none d-sm-block" href="#">Essenza</a>
+        
+        <div class="ms-auto">
+          <ul class="navbar-nav d-flex flex-row gap-4">
+            <li class="nav-item">
+              <a class="nav-link active" href="#" id="navTodos" title="Todos os Produtos">
+                <i class="bi bi-grid fs-5"></i>
+                <span class="d-none d-md-inline ms-2">Todos</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="navFavoritos" title="Favoritos">
+                <i class="bi bi-star fs-5"></i>
+                <span class="d-none d-md-inline ms-2">Favoritos</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="navCarrinho" title="Carrinho de Compras">
+                <i class="bi bi-cart fs-5"></i>
+                <span class="d-none d-md-inline ms-2">Carrinho</span>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
