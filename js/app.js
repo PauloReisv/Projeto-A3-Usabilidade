@@ -50,18 +50,31 @@ async function carregarProdutos() {
 // ========== RENDERIZAÇÃO ==========
 function criarCard(produto) {
   const favorito = isFavorito(produto.id);
-  const classeEstrela = favorito ? 'bi-star-fill favorite-active' : 'bi-star';
+  const classeCoracao = favorito ? 'bi-heart-fill fav-icon' : 'bi-heart fav-icon';
   return `
-    <div class="col-md-4 col-lg-3">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 border p-4">
       <div class="card h-100">
-        <img src="${produto.thumbnail}" class="card-img-top" alt="${produto.title}" loading="lazy">
-        <div class="card-body d-flex flex-column">
-          <span class="badge bg-secondary mb-2 align-self-start">${produto.category}</span>
-          <h5 class="card-title">${produto.title}</h5>
-          <p class="card-text text-success fw-bold fs-5">$${produto.price.toFixed(2)}</p>
-          <button class="btn btn-outline-warning mt-auto favorite-btn" data-id="${produto.id}" aria-label="Favoritar">
-            <i class="bi ${classeEstrela}"></i>
-          </button>
+        <!-- Imagem de capa (thumbnail) -->
+        <img src="${produto.thumbnail}" class="card-img-top" alt="${produto.title}"
+             style="max-height: 100px; object-fit: cover;">
+        <!-- Imagem redonda sobreposta -->
+        <div class="d-flex justify-content-center" style="margin-top: -40px;">
+          <img src="${produto.images[0] || produto.thumbnail}" alt="${produto.title}"
+               style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;
+                      border: 3px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
+        </div>
+        <div class="card-body">
+          <div class="fw-bold">${produto.title}</div>
+          <div class="fw-light" style="font-size: 10pt">$${produto.price.toFixed(2)}</div>
+          <p class="text-secondary fs-6">
+            ${produto.description.slice(0, 80)}...
+          </p>
+          <div class="d-flex justify-content-around align-items-center">
+            <i class="bi ${classeCoracao}" data-id="${produto.id}" aria-label="Favoritar"></i>
+            <button class="btn btn-outline-secondary btn-sm favorite-btn" data-id="${produto.id}">
+              <i class="bi bi-star me-1"></i> Favoritar
+            </button>
+          </div>
         </div>
       </div>
     </div>`;
@@ -75,9 +88,11 @@ function renderProdutos(produtos) {
   }
   mensagemVazia.style.display = 'none';
   containerProdutos.innerHTML = produtos.map(criarCard).join('');
-  document.querySelectorAll('.favorite-btn').forEach(botao => {
-    botao.addEventListener('click', (evento) => {
-      const id = Number(botao.dataset.id);
+
+  // Eventos de favoritar (ícone coração e botão)
+  document.querySelectorAll('.fav-icon, .favorite-btn').forEach(elemento => {
+    elemento.addEventListener('click', (e) => {
+      const id = Number(elemento.dataset.id);
       alternarFavorito(id);
     });
   });

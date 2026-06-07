@@ -1,50 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-    <script src="https://code.iconify.design/iconify-icon/3.0.2/iconify-icon.min.js"></script>
-    <script src="handlebars.min.js"></script>
-    <title>Lugares Favoritos</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Produtos</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    /* Pequenos ajustes para os cards */
+    .card-img-top {
+      object-fit: cover;
+    }
+    .card {
+      border: none; /* A borda já está na coluna, para ficar igual ao template */
+    }
+    .fav-icon {
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+    .fav-icon.bi-heart-fill {
+      color: #dc3545; /* vermelho quando favorito */
+    }
+  </style>
 </head>
-
 <body>
-
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <iconify-icon icon="lucide:users" class="fs-2 me-1"></iconify-icon>
-            <span class="navbar-brand">Catálogo de Lugares</span>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <div class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Onde quer viajar?" aria-label="Search" />
-                    <button class="btn btn-outline-success">Procurar</button>
-                </div>
-            </div>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">📦 Catálogo de Produtos</a>
+        <div class="navbar-nav">
+          <a class="nav-link active" href="#" id="navTodos">Todos</a>
+          <a class="nav-link" href="#" id="navFavoritos">⭐ Favoritos</a>
         </div>
+      </div>
     </nav>
+  </header>
 
-    <div class="container">
-        <div class="row" id="UsersList">
-        </div>
+  <main class="container my-4">
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <input type="text" id="campoBusca" class="form-control" placeholder="Buscar por nome do produto...">
+      </div>
     </div>
 
+    <div id="containerProdutos" class="row g-4"></div>
 
-    <!-- <div class='flex items-center gap-3 m-1 p-1 bg-indigo-200 rounded' id="UsersList">
-    </div> -->
+    <div id="mensagemVazia" class="text-center mt-5" style="display: none;">
+      <h4>Nenhum produto encontrado</h4>
+      <p>Tente ajustar sua busca ou favoritar alguns produtos.</p>
+    </div>
+  </main>
 
-    <script src="./main.js"></script>
-
+  <script src="js/app.js"></script>
 </body>
-
 </html>
