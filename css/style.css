@@ -143,7 +143,7 @@ body {
   color: #C25A5A;
 }
 
-.btn-favoritar {
+.btn-acao {
   background: transparent;
   border: 1px solid var(--dourado);
   color: var(--dourado);
@@ -155,7 +155,7 @@ body {
   transition: all 0.3s;
 }
 
-.btn-favoritar:hover {
+.btn-acao:hover {
   background: var(--dourado);
   color: white;
 }

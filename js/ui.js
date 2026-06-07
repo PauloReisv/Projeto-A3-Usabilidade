@@ -1,8 +1,7 @@
-import { isFavorito } from './storage.js';
+import { isFavorito, isNoCarrinho } from './storage.js';
 
 const containerProdutos = document.getElementById('containerProdutos');
 const mensagemVazia = document.getElementById('mensagemVazia');
-// Objeto de mapeamento para tradução das categorias da DummyJSON API
 const traducaoCategorias = {
   'beauty': 'Beleza',
   'fragrances': 'Fragrâncias',
@@ -32,6 +31,8 @@ const traducaoCategorias = {
 function criarCard(produto) {
   const favorito = isFavorito(produto.id);
   const classeEstrela = favorito ? 'bi-star-fill' : 'bi-star';
+  const noCarrinho = isNoCarrinho(produto.id);
+  const classeCarrinho = noCarrinho ? 'bi-cart-fill' : 'bi-cart';
 
   return `
     <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
@@ -44,9 +45,12 @@ function criarCard(produto) {
           <div class="product-title">${produto.title}</div>
           <div class="product-price">R$ ${produto.price.toFixed(2)}</div>
           <p class="product-description">${produto.description.slice(0, 70)}...</p>
-          <div class="product-actions">
-            <button class="btn-favoritar favorite-btn" data-id="${produto.id}">
-              <i class="bi ${classeEstrela} me-1"></i> Favoritar
+          <div class="product-actions d-flex justify-content-between">
+            <button class="btn-acao favorite-btn" data-id="${produto.id}" title="Favoritar">
+              <i class="bi ${classeEstrela}"></i>
+            </button>
+            <button class="btn-acao cart-btn" data-id="${produto.id}" title="Adicionar ao Carrinho">
+              <i class="bi ${classeCarrinho}"></i>
             </button>
           </div>
         </div>
@@ -54,7 +58,7 @@ function criarCard(produto) {
     </div>`;
 }
 
-export function renderProdutos(produtos, onAlternarFavorito) {
+export function renderProdutos(produtos, onAlternarFavorito, onAlternarCarrinho) {
   if (!produtos.length) {
     containerProdutos.innerHTML = '';
     mensagemVazia.style.display = 'block';
@@ -66,8 +70,42 @@ export function renderProdutos(produtos, onAlternarFavorito) {
 
   document.querySelectorAll('.favorite-btn').forEach(elemento => {
     elemento.addEventListener('click', () => {
-      const id = Number(elemento.dataset.id);
-      onAlternarFavorito(id);
+      onAlternarFavorito(Number(elemento.dataset.id));
+    });
+  });
+
+  document.querySelectorAll('.cart-btn').forEach(elemento => {
+    elemento.addEventListener('click', () => {
+      onAlternarCarrinho(Number(elemento.dataset.id));
+    });
+  });
+}
+
+export function renderCategorias(categorias) {
+  const selectCategoria = document.getElementById('filtroCategoria');
+  const optionsHTML = categorias.map(cat => {
+    const nomeTraduzido = traducaoCategorias[cat] || (cat.charAt(0).toUpperCase() + cat.slice(1));
+    return `<option value="${cat}">${nomeTraduzido}</option>`;
+  }).join('');
+  selectCategoria.innerHTML = `<option value="">Todas as Categorias</option>` + optionsHTML;
+}
+
+export function renderPaginacao(totalPaginas, paginaAtual, onMudarPagina) {
+  const container = document.getElementById('paginacaoContainer');
+  if (totalPaginas <= 1) {
+    container.innerHTML = '';
+    return;
+  }
+  let html = '';
+  for (let i = 1; i <= totalPaginas; i++) {
+    const active = i === paginaAtual ? 'active' : '';
+    html += `<li class="page-item ${active}"><button class="page-link" data-page="${i}">${i}</button></li>`;
+  }
+  container.innerHTML = html;
+  container.querySelectorAll('.page-link').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      onMudarPagina(Number(e.target.dataset.page));
     });
   });
 }
@@ -76,42 +114,6 @@ export function mostrarErro() {
   containerProdutos.innerHTML = `
     <div class="col-12 text-center text-danger">
       <h4>Erro ao carregar produtos</h4>
-      <p>Verifique sua conexão com a internet e tente novamente.</p>
+      <p>Verifique a sua ligação à internet e tente novamente.</p>
     </div>`;
-}
-
-export function renderCategorias(categorias) {
-  const selectCategoria = document.getElementById('filtroCategoria');
-  
-  const optionsHTML = categorias.map(cat => {
-    // Busca a tradução. Se não existir no objeto, exibe o termo original capitalizado.
-    const nomeTraduzido = traducaoCategorias[cat] || (cat.charAt(0).toUpperCase() + cat.slice(1));
-    return `<option value="${cat}">${nomeTraduzido}</option>`;
-  }).join('');
-  
-  selectCategoria.innerHTML = `<option value="">Todas as Categorias</option>` + optionsHTML;
-}
-
-export function renderPaginacao(totalPaginas, paginaAtual, onMudarPagina) {
-  const container = document.getElementById('paginacaoContainer');
-  
-  if (totalPaginas <= 1) {
-    container.innerHTML = '';
-    return;
-  }
-
-  let html = '';
-  for (let i = 1; i <= totalPaginas; i++) {
-    const active = i === paginaAtual ? 'active' : '';
-    html += `<li class="page-item ${active}"><button class="page-link" data-page="${i}">${i}</button></li>`;
-  }
-
-  container.innerHTML = html;
-
-  container.querySelectorAll('.page-link').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      onMudarPagina(Number(e.target.dataset.page));
-    });
-  });
 }
