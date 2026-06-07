@@ -31,8 +31,7 @@ body {
 
 .nav-link.active {
   color: white !important;
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  text-decoration: none;
 }
 
 .search-input {

@@ -1,6 +1,6 @@
 import { carregarProdutosApi } from './api.js';
 import { obterFavoritos, salvarFavoritos, obterCarrinho, salvarCarrinho } from './storage.js';
-import { renderProdutos, mostrarErro, renderCategorias, renderPaginacao } from './ui.js';
+import { renderProdutos, mostrarErro, renderCategorias, renderPaginacao, exibirModal } from './ui.js';
 
 let todosProdutos = [];
 let modoExibicao = 'todos'; 
@@ -35,6 +35,14 @@ function alternarCarrinho(id) {
   }
   salvarCarrinho(carrinho);
   renderizarInterface();
+}
+
+// Nova função orquestradora do Modal
+function verDetalhes(id) {
+  const produto = todosProdutos.find(p => p.id === id);
+  if (produto) {
+    exibirModal(produto);
+  }
 }
 
 function mudarPagina(novaPagina) {
@@ -77,7 +85,6 @@ function processarProdutos() {
 
 function renderizarInterface() {
   const produtosProcessados = processarProdutos();
-  
   const totalPaginas = Math.ceil(produtosProcessados.length / ITENS_POR_PAGINA);
   
   if (paginaAtual > totalPaginas && totalPaginas > 0) {
@@ -88,7 +95,8 @@ function renderizarInterface() {
   const fim = inicio + ITENS_POR_PAGINA;
   const produtosPagina = produtosProcessados.slice(inicio, fim);
 
-  renderProdutos(produtosPagina, alternarFavorito, alternarCarrinho);
+  // Passando o callback 'verDetalhes' para o renderizador da interface
+  renderProdutos(produtosPagina, alternarFavorito, alternarCarrinho, verDetalhes);
   renderPaginacao(totalPaginas, paginaAtual, mudarPagina);
 }
 

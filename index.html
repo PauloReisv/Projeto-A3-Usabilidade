@@ -78,6 +78,20 @@
       <p>Tente outro termo ou limpe os filtros.</p>
     </div>
   </main>
+  
+<div class="modal fade" id="modalDetalhes" tabindex="-1" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="background-color: var(--creme); border: 2px solid var(--dourado); border-radius: 12px;">
+        <div class="modal-header" style="border-bottom: 1px solid var(--bege);">
+          <h5 class="modal-title" id="modalDetalhesTitulo" style="font-family: var(--fonte-titulo); color: var(--marrom); font-weight: 600;"></h5>
+          <button type="button" class="btn-close" id="btnFecharModal" style="cursor: pointer;"></button>
+        </div>
+        <div class="modal-body" id="modalDetalhesCorpo" style="font-family: var(--fonte-corpo);">
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-backdrop fade" id="modalBackdrop" style="display: none; pointer-events: none;"></div>
 
   <script src="js/app.js" type="module"></script>
 </body>
