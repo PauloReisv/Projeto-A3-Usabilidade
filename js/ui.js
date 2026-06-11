@@ -24,6 +24,8 @@ function criarCard(produto) {
   const noCarrinho = isNoCarrinho(produto.id);
   const classeCarrinho = noCarrinho ? 'bi-cart-fill' : 'bi-cart';
 
+  const nomeCategoria = traducaoCategorias[produto.category] || produto.category;
+
   return `
     <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
       <div class="product-card">
@@ -31,6 +33,7 @@ function criarCard(produto) {
           <img src="${produto.thumbnail}" class="card-img-top-cover w-100" alt="${produto.title}">
         </div>
         <div class="card-body-custom">
+          <span class="badge bg-secondary mb-2">${nomeCategoria}</span>
           <div class="product-title detalhes-gatilho" data-id="${produto.id}" style="cursor: pointer;">${produto.title}</div>
           <div class="product-price">R$ ${produto.price.toFixed(2)}</div>
           <p class="product-description">${produto.description.slice(0, 70)}...</p>
