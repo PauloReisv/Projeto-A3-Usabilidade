@@ -1,6 +1,6 @@
 import { carregarProdutosApi } from './api.js';
 import { obterFavoritos, salvarFavoritos, obterCarrinho, salvarCarrinho } from './storage.js';
-import { renderProdutos, mostrarErro, renderCategorias, renderPaginacao, exibirModal } from './ui.js';
+import { renderProdutos, mostrarErro, renderCategorias, renderPaginacao, exibirModal, mostrarCarregamento } from './ui.js';
 
 let todosProdutos = [];
 let modoExibicao = 'todos'; 
@@ -130,6 +130,7 @@ ordenacaoPreco.addEventListener('change', () => { paginaAtual = 1; renderizarInt
 
 async function init() {
   try {
+    mostrarCarregamento();
     todosProdutos = await carregarProdutosApi();
     extrairERenderizarCategorias();
     renderizarInterface();
@@ -139,8 +140,4 @@ async function init() {
   }
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
-}
+init();

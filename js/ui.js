@@ -50,6 +50,17 @@ function criarCard(produto) {
     </div>`;
 }
 
+export function mostrarCarregamento() {
+  containerProdutos.innerHTML = `
+    <div class="col-12 d-flex flex-column align-items-center justify-content-center py-5">
+      <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="visually-hidden">Carregando...</span>
+      </div>
+      <p class="mt-3 text-muted">Carregando produtos...</p>
+    </div>`;
+  mensagemVazia.style.display = 'none';
+}
+
 export function renderProdutos(produtos, onAlternarFavorito, onAlternarCarrinho, onVerDetalhes) {
   if (!produtos.length) {
     containerProdutos.innerHTML = '';
